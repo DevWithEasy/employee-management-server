@@ -1,5 +1,6 @@
 const authRouter = require("./authRoute")
 const sectionRouter = require('./sectionRoute')
+const designationRouter = require('./designationRoute')
 const employeeRouter = require('./employeeRoute')
 const attendanceRouter = require('./attendaceRoute')
 
@@ -11,6 +12,10 @@ const routes = [
   {
     path: "/api/section",
     handler : sectionRouter
+  },
+  {
+    path: "/api/designation",
+    handler : designationRouter
   },
   {
     path: "/api/employee",

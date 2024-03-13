@@ -6,8 +6,7 @@ const router = require('express').Router()
 router.post('/create', verifyToken,upload.single('image'),createEmployee)
     .put('/update/:id', verifyToken,employeeUpdate)
     .delete('/delete/:id', verifyToken,employeeDelete)
-    .get('/:phone', verifyToken)
-    .get('/',verifyToken, getAllEmployee)
+    .get('/all/:id',verifyToken, getAllEmployee)
     .get('/attendance',verifyToken, getAllEmployeeAdttendance)
-
+    
 module.exports = router
