@@ -1,10 +1,6 @@
 const mongoose = require('mongoose')
 
 const EmployeeSchema = new mongoose.Schema({
-    user : {
-        type : mongoose.Types.ObjectId,
-        ref : 'User'
-    },
     IDNo : {
         type : Number,
         required : true
@@ -43,8 +39,14 @@ const EmployeeSchema = new mongoose.Schema({
         type : Number,
         required : true,
     },
+    section : {
+        type : mongoose.Types.ObjectId,
+        ref : 'Section',
+        required : true,
+    },
     designation : {
-        type : String,
+        type : mongoose.Types.ObjectId,
+        ref : 'Designation',
         required : true,
     },
     joinDate : {
