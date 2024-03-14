@@ -8,7 +8,7 @@ router.post('/create/:id',verifyToken,createAttendance)
     .put('/update', verifyToken,updateAttendance)
     .delete('/delete/:id', verifyToken)
     .post('/monthly', verifyToken,getMonthAttendance)
-    .post('/monthlybook', verifyToken,getMonthAttendanceBook)
+    .post('/monthlybook/:id', verifyToken,getMonthAttendanceBook)
     .post('/salary',verifyToken,getMonthlySalary)
 
 module.exports = router

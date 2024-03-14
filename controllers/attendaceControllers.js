@@ -251,7 +251,7 @@ exports.getMonthAttendance = async (req, res, next) => {
 
 exports.getMonthAttendanceBook = async (req, res, next) => {
     try {
-        const employees = await Employee.find({}).select('IDNo name salary')
+        const employees = await Employee.find({section : req.params.id}).select('IDNo name salary')
 
         // Use map to create an array of promises
         const promises = employees.map(async (employee) => {
