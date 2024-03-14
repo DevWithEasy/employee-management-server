@@ -11,7 +11,7 @@ exports.createEmployee = async (req, res, next) => {
         if (!req.file) {
             return createError(400, 'File not Found.')
         }
-        const employees = await Employee.countDocuments()
+        const employees = await Employee.countDocuments({section : req.body.section})
 
         const new_employee = new Employee({
             ...req.body,
@@ -35,19 +35,19 @@ exports.createEmployee = async (req, res, next) => {
                 new_employee.barCode = url
                 const employee = await new_employee.save()
 
-                // const date = new Date(req.body.joinDate)
+                const date = new Date(req.body.joinDate)
 
-                // for (let i = 1; i < date.getDate(); i++) {
+                for (let i = 1; i < date.getDate(); i++) {
 
-                //     const dateString = new Date(date.getFullYear(),padStart(date.getMonth()),padStart(i),0,0,0,1)
+                    const dateString = new Date(date.getFullYear(),padStart(date.getMonth()),padStart(i),0,0,0,1)
 
-                //     const new_Attendance = new Attendance({
-                //         date : dateString,
-                //         status: 'A',
-                //         employee: new_employee._id
-                //     })
-                //     new_Attendance.save()
-                // }
+                    const new_Attendance = new Attendance({
+                        date : dateString,
+                        status: 'A',
+                        employee: new_employee._id
+                    })
+                    new_Attendance.save()
+                }
 
                 res.status(200).json({
                     success: true,
