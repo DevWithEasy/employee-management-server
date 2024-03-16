@@ -223,9 +223,24 @@ exports.updateAttendance = async (req, res, next) => {
 }
 
 exports.getMonthAttendance = async (req, res, next) => {
+
     try {
+        const employee = await Employee.findOne({
+            section : req.body.section,
+            IDNo : req.body.id
+        })
+        .populate('section', 'name')
+
+        if(!employee) {
+            return res.status(404).json({
+                success: false,
+                status: 500,
+                message: 'Employee Not Found'
+            })
+        }
+
         const query = {
-            employee: req.body.id,
+            employee: employee._id,
             date: {
                 $gt: month(req.body.start, req.body.end, 'start'),
                 $lt: month(req.body.start, req.body.end, 'end')
@@ -238,7 +253,10 @@ exports.getMonthAttendance = async (req, res, next) => {
             success: true,
             status: 200,
             message: '',
-            data: attendances
+            data: {
+                employee : employee._doc,
+                attendances
+            }
         })
     } catch (err) {
         res.status(500).json({
