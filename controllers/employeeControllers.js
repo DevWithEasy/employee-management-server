@@ -123,13 +123,11 @@ exports.employeeUpdate = async (req, res, next) => {
             }
         })
 
-        const employees = await Employee.find({ user: req.body.user._id })
-
         res.status(200).json({
             success: true,
             status: 200,
             message: 'Employee Updated Successfuly.',
-            data: employees
+            data: {}
         })
     } catch (err) {
         res.status(500).json({
